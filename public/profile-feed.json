@@ -1,24 +1,33 @@
 {
-  "last_update": null,
+  "last_update": "2026-04-02",
   "active_tracks": [],
   "current_focuses": [],
   "last14": {
     "研究": 0,
-    "学習": 0,
+    "学習": 1,
     "就活": 0,
-    "PJ": 0,
+    "PJ": 1,
     "運動": 0,
     "興味": 0
   },
   "last30": {
     "研究": 0,
-    "学習": 0,
+    "学習": 1,
     "就活": 0,
-    "PJ": 0,
+    "PJ": 1,
     "運動": 0,
     "興味": 0
   },
   "interest_topics": [],
-  "summary": "まだログがない。",
-  "recent_entries": []
+  "summary": "最近30日では「学習」と「PJ」が中心。",
+  "recent_entries": [
+    {
+      "date": "2026-04-02",
+      "summary": "2026-04-02 | (no details)"
+    },
+    {
+      "date": "2026-04-01",
+      "summary": "2026-04-01 | [PJ] GitHubホームページを作成 / [PJ] 学部卒業設計を整理・アップロード / [PJ] Taskerプロジェクトを整理・アップロード"
+    }
+  ]
 }

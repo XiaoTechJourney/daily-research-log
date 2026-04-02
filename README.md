@@ -5,24 +5,30 @@ A record of research, study, projects, fitness, and daily life.
 
 <!-- AUTO:START -->
 ## Snapshot
-- Last update: none
+- Last update: 2026-04-02
 - Active tracks: none
+- Current focuses:
+  - none
 
 ## Main Tracks (Last 30 Days)
 - 研究: 0 days
-- 学習: 0 days
+- 学習: 1 day
 - 就活: 0 days
-- PJ: 0 days
+- PJ: 1 day
 
 ## Personal Rhythm (Last 30 Days)
 - 運動: 0 days
 - 興味: none recently
 
 ## Monthly Summary
-まだログがない。
+最近30日では「学習」と「PJ」が中心。
 
 ## Recent Entries
-- none
+- 2026-04-02 | (no details)
+- 2026-04-01 | [PJ] GitHubホームページを作成 / [PJ] 学部卒業設計を整理・アップロード / [PJ] Taskerプロジェクトを整理・アップロード
+
+## Archive
+- [2026-04](2026/2026-04)
 <!-- AUTO:END -->
 
 ## Tags
