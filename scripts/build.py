@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import html
 import json
 import re
-from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -14,6 +14,14 @@ FEED_FILE = ROOT / "public" / "profile-feed.json"
 MAIN_TAGS = ["研究", "学習", "就活", "PJ"]
 PERSONAL_TAGS = ["運動", "興味"]
 ALL_TAGS = MAIN_TAGS + PERSONAL_TAGS
+TAG_META = {
+    "研究": {"icon": "🧪"},
+    "学習": {"icon": "📘"},
+    "就活": {"icon": "💼"},
+    "PJ": {"icon": "🛠️"},
+    "運動": {"icon": "🏃"},
+    "興味": {"icon": "🌿"},
+}
 
 SECTION_ALIASES = {
     "Tracks": "Tracks",
@@ -193,6 +201,73 @@ def format_day_count(n):
     return "1 day" if n == 1 else f"{n} days"
 
 
+def escape_readme_text(text):
+    return html.escape(text, quote=False).replace("|", "\\|").strip()
+
+
+def tag_icon(tag):
+    return TAG_META.get(tag, {}).get("icon", "•")
+
+
+def render_tag_chip(tag):
+    return f"<code>{tag_icon(tag)} {escape_readme_text(tag)}</code>"
+
+
+def render_bar(count, max_count, width=8):
+    if max_count <= 0 or count <= 0:
+        return "░" * width
+
+    filled = max(1, round((count / max_count) * width))
+    filled = min(width, filled)
+    return "█" * filled + "░" * (width - filled)
+
+
+def render_snapshot_table(last_update, active_tracks, focuses):
+    active_text = " ".join(render_tag_chip(tag) for tag in active_tracks) if active_tracks else "none"
+    focus_text = "<br>".join(f"• {escape_readme_text(x)}" for x in focuses) if focuses else "none"
+
+    return "\n".join(
+        [
+            "<table>",
+            "  <tr>",
+            f"    <td valign=\"top\" width=\"28%\"><strong>Last update</strong><br><code>{last_update}</code></td>",
+            f"    <td valign=\"top\" width=\"72%\"><strong>Current focuses</strong><br>{focus_text}</td>",
+            "  </tr>",
+            "  <tr>",
+            f"    <td colspan=\"2\"><strong>Active tracks</strong><br>{active_text}</td>",
+            "  </tr>",
+            "</table>",
+        ]
+    )
+
+
+def render_count_table(tags, counts):
+    max_count = max((counts[tag] for tag in tags), default=0)
+    lines = [
+        "| Track | Days | Activity |",
+        "| --- | ---: | --- |",
+    ]
+
+    for tag in tags:
+        lines.append(
+            f"| {tag_icon(tag)} {tag} | {format_day_count(counts[tag])} | {render_bar(counts[tag], max_count)} |"
+        )
+
+    return "\n".join(lines)
+
+
+def render_personal_table(counts, interest_text):
+    max_count = max(counts["運動"], 0)
+    return "\n".join(
+        [
+            "| Item | Recent | Activity |",
+            "| --- | --- | --- |",
+            f"| {tag_icon('運動')} 運動 | {format_day_count(counts['運動'])} | {render_bar(counts['運動'], max_count)} |",
+            f"| {tag_icon('興味')} 興味 | {escape_readme_text(interest_text)} | - |",
+        ]
+    )
+
+
 def render_recent_entry(entry, limit=3):
     done_items = entry["sections"]["Done"]
     if not done_items:
@@ -201,12 +276,13 @@ def render_recent_entry(entry, limit=3):
     pieces = []
     for item in done_items[:limit]:
         if item["tags"]:
-            pieces.append(f"[{item['tags'][0]}] {item['text']}")
+            pieces.append(f"{tag_icon(item['tags'][0])} [{item['tags'][0]}] {item['text']}")
         else:
             pieces.append(item["text"])
 
     joined = " / ".join(pieces) if pieces else "(no details)"
-    return f"- {entry['date'].isoformat()} | {joined}"
+    rel_path = entry["path"].relative_to(ROOT).as_posix()
+    return f"- [{entry['date'].isoformat()}]({rel_path}) | {joined}"
 
 
 def collect_archive_links(entries, limit=6):
@@ -226,21 +302,16 @@ def build_auto_block(entries):
         return "\n".join(
             [
                 "## 📌 Snapshot",
-                "- Last update: none",
-                "- Active tracks: none",
+                render_snapshot_table("none", [], []),
                 "",
                 "## 📚 Main Tracks (Last 30 Days)",
-                "- 研究: 0 days",
-                "- 学習: 0 days",
-                "- 就活: 0 days",
-                "- PJ: 0 days",
+                render_count_table(MAIN_TAGS, {tag: 0 for tag in ALL_TAGS}),
                 "",
                 "## 🌱 Personal Rhythm (Last 30 Days)",
-                "- 運動: 0 days",
-                "- 興味: none recently",
+                render_personal_table({tag: 0 for tag in ALL_TAGS}, "none recently"),
                 "",
                 "## 🗂️ Monthly Summary",
-                "まだログがない。",
+                "> まだログがない。",
                 "",
                 "## 🕒 Recent Entries",
                 "- none",
@@ -250,14 +321,10 @@ def build_auto_block(entries):
     latest = entries[-1]
     ref_date = latest["date"]
 
-    counts_14 = count_days_by_tag(entries, 14, ref_date)
     counts_30 = count_days_by_tag(entries, 30, ref_date)
 
     active_tracks = latest_active_tracks(latest)
-    active_tracks_text = " / ".join(active_tracks) if active_tracks else "none"
-
     focuses = latest_focuses(latest, limit=3)
-    focuses_block = "\n".join([f"  - {x}" for x in focuses]) if focuses else "  - none"
 
     interest_topics = recent_interest_topics(entries, 30, ref_date, limit=3)
     interest_text = " / ".join(interest_topics) if interest_topics else "none recently"
@@ -271,23 +338,16 @@ def build_auto_block(entries):
 
     lines = [
         "## 📌 Snapshot",
-        f"- Last update: {latest['date'].isoformat()}",
-        f"- Active tracks: {active_tracks_text}",
-        "- Current focuses:",
-        focuses_block,
+        render_snapshot_table(latest["date"].isoformat(), active_tracks, focuses),
         "",
         "## 📚 Main Tracks (Last 30 Days)",
-        f"- 研究: {format_day_count(counts_30['研究'])}",
-        f"- 学習: {format_day_count(counts_30['学習'])}",
-        f"- 就活: {format_day_count(counts_30['就活'])}",
-        f"- PJ: {format_day_count(counts_30['PJ'])}",
+        render_count_table(MAIN_TAGS, counts_30),
         "",
         "## 🌱 Personal Rhythm (Last 30 Days)",
-        f"- 運動: {format_day_count(counts_30['運動'])}",
-        f"- 興味: {interest_text}",
+        render_personal_table(counts_30, interest_text),
         "",
         "## 🗂️ Monthly Summary",
-        summary,
+        f"> {summary}",
         "",
         "## 🕒 Recent Entries",
         recent_entries,
@@ -297,8 +357,11 @@ def build_auto_block(entries):
         lines.extend(
             [
                 "",
-                "## 📁 Archive",
+                "<details>",
+                "<summary><strong>📁 Archive</strong></summary>",
+                "",
                 archive_block,
+                "</details>",
             ]
         )
 
