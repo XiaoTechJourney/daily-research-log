@@ -228,7 +228,7 @@ def render_snapshot_table(last_update, active_tracks, focuses):
 
     return "\n".join(
         [
-            "<table>",
+            "<table width=\"100%\">",
             "  <tr>",
             f"    <td valign=\"top\" width=\"28%\"><strong>Last update</strong><br><code>{last_update}</code></td>",
             f"    <td valign=\"top\" width=\"72%\"><strong>Current focuses</strong><br>{focus_text}</td>",
@@ -244,15 +244,28 @@ def render_snapshot_table(last_update, active_tracks, focuses):
 def render_count_table(tags, counts):
     max_count = max((counts[tag] for tag in tags), default=0)
     lines = [
-        "| Track | Days | Activity |",
-        "| --- | ---: | --- |",
+        "<table width=\"100%\">",
+        "  <tr>",
+        "    <th align=\"left\" width=\"26%\">Track</th>",
+        "    <th align=\"left\" width=\"16%\">Days</th>",
+        "    <th align=\"left\" width=\"58%\">Activity</th>",
+        "  </tr>",
     ]
 
     for tag in tags:
         lines.append(
-            f"| {tag_icon(tag)} {tag} | {format_day_count(counts[tag])} | {render_bar(counts[tag], max_count)} |"
+            "\n".join(
+                [
+                    "  <tr>",
+                    f"    <td>{tag_icon(tag)} {tag}</td>",
+                    f"    <td>{format_day_count(counts[tag])}</td>",
+                    f"    <td><code>{render_bar(counts[tag], max_count)}</code></td>",
+                    "  </tr>",
+                ]
+            )
         )
 
+    lines.append("</table>")
     return "\n".join(lines)
 
 
@@ -260,10 +273,23 @@ def render_personal_table(counts, interest_text):
     max_count = max(counts["運動"], 0)
     return "\n".join(
         [
-            "| Item | Recent | Activity |",
-            "| --- | --- | --- |",
-            f"| {tag_icon('運動')} 運動 | {format_day_count(counts['運動'])} | {render_bar(counts['運動'], max_count)} |",
-            f"| {tag_icon('興味')} 興味 | {escape_readme_text(interest_text)} | - |",
+            "<table width=\"100%\">",
+            "  <tr>",
+            "    <th align=\"left\" width=\"26%\">Item</th>",
+            "    <th align=\"left\" width=\"44%\">Recent</th>",
+            "    <th align=\"left\" width=\"30%\">Activity</th>",
+            "  </tr>",
+            "  <tr>",
+            f"    <td>{tag_icon('運動')} 運動</td>",
+            f"    <td>{format_day_count(counts['運動'])}</td>",
+            f"    <td><code>{render_bar(counts['運動'], max_count)}</code></td>",
+            "  </tr>",
+            "  <tr>",
+            f"    <td>{tag_icon('興味')} 興味</td>",
+            f"    <td>{escape_readme_text(interest_text)}</td>",
+            "    <td>-</td>",
+            "  </tr>",
+            "</table>",
         ]
     )
 
