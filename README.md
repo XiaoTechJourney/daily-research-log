@@ -1,7 +1,7 @@
 <!-- This file is the manual base for README.md -->
 # Daily Research Log
 
-A quiet record of research, study, projects, fitness, and daily life.
+A record of research, study, projects, fitness, and daily life.
 
 <!-- AUTO:START -->
 ## Snapshot
