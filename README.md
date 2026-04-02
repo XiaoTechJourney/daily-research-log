@@ -5,63 +5,19 @@ A record of research, study, projects, fitness, and daily life.
 
 <!-- AUTO:START -->
 ## 📌 Snapshot
-<table width="100%">
-  <tr>
-    <td valign="top" width="28%"><strong>Last update</strong><br><code>2026-04-02</code></td>
-    <td valign="top" width="72%"><strong>Current focuses</strong><br>• 基本情報の復習<br>• T社のIT事業分析<br>• daily-logの改善</td>
-  </tr>
-  <tr>
-    <td colspan="2"><strong>Active tracks</strong><br><code>📘 学習</code> <code>💼 就活</code> <code>🛠️ PJ</code> <code>🧪 研究</code> <code>🏃 運動</code></td>
-  </tr>
-</table>
+- **Last update:** `2026-04-02`
+- **Current focuses:** 基本情報の復習 / T社のIT事業分析 / daily-logの改善
+- **Active tracks:** <code>📘 学習</code> <code>💼 就活</code> <code>🛠️ PJ</code> <code>🧪 研究</code> <code>🏃 運動</code>
 
 ## 📚 Main Tracks (Last 30 Days)
-<table width="100%">
-  <tr>
-    <th align="left" width="26%">Track</th>
-    <th align="left" width="16%">Days</th>
-    <th align="left" width="58%">Activity</th>
-  </tr>
-  <tr>
-    <td>🧪 研究</td>
-    <td>1 day</td>
-    <td><code>████░░░░</code></td>
-  </tr>
-  <tr>
-    <td>📘 学習</td>
-    <td>2 days</td>
-    <td><code>████████</code></td>
-  </tr>
-  <tr>
-    <td>💼 就活</td>
-    <td>1 day</td>
-    <td><code>████░░░░</code></td>
-  </tr>
-  <tr>
-    <td>🛠️ PJ</td>
-    <td>2 days</td>
-    <td><code>████████</code></td>
-  </tr>
-</table>
+- **🧪 研究**: `1 day`  `████░░░░`
+- **📘 学習**: `2 days`  `████████`
+- **💼 就活**: `1 day`  `████░░░░`
+- **🛠️ PJ**: `2 days`  `████████`
 
 ## 🌱 Personal Rhythm (Last 30 Days)
-<table width="100%">
-  <tr>
-    <th align="left" width="26%">Item</th>
-    <th align="left" width="44%">Recent</th>
-    <th align="left" width="30%">Activity</th>
-  </tr>
-  <tr>
-    <td>🏃 運動</td>
-    <td>1 day</td>
-    <td><code>████████</code></td>
-  </tr>
-  <tr>
-    <td>🌿 興味</td>
-    <td>none recently</td>
-    <td>-</td>
-  </tr>
-</table>
+- **🏃 運動**: `1 day`  `████████`
+- **🌿 興味**: none recently
 
 ## 🗂️ Monthly Summary
 > 最近30日では「学習」と「PJ」が中心。
@@ -78,33 +34,9 @@ A record of research, study, projects, fitness, and daily life.
 <!-- AUTO:END -->
 
 ## 🏷️ Tag Guide
-<table width="100%">
-  <tr>
-    <th align="left" width="22%">Tag</th>
-    <th align="left" width="78%">Use for</th>
-  </tr>
-  <tr>
-    <td><code>🧪 研究</code></td>
-    <td>Research / lab / experiments</td>
-  </tr>
-  <tr>
-    <td><code>📘 学習</code></td>
-    <td>Exam study / courses / technical learning</td>
-  </tr>
-  <tr>
-    <td><code>💼 就活</code></td>
-    <td>Internship / job hunting</td>
-  </tr>
-  <tr>
-    <td><code>🛠️ PJ</code></td>
-    <td>Personal projects / GitHub / coding / archiving</td>
-  </tr>
-  <tr>
-    <td><code>🏃 運動</code></td>
-    <td>Training / gym / running / stretching</td>
-  </tr>
-  <tr>
-    <td><code>🌿 興味</code></td>
-    <td>Curiosity / tools / side interests</td>
-  </tr>
-</table>
+- `🧪 研究`: Research / lab / experiments
+- `📘 学習`: Exam study / courses / technical learning
+- `💼 就活`: Internship / job hunting
+- `🛠️ PJ`: Personal projects / GitHub / coding / archiving
+- `🏃 運動`: Training / gym / running / stretching
+- `🌿 興味`: Curiosity / tools / side interests
