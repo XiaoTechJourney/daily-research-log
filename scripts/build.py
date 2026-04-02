@@ -225,24 +225,24 @@ def build_auto_block(entries):
     if not entries:
         return "\n".join(
             [
-                "## Snapshot",
+                "## 📌 Snapshot",
                 "- Last update: none",
                 "- Active tracks: none",
                 "",
-                "## Main Tracks (Last 30 Days)",
+                "## 📚 Main Tracks (Last 30 Days)",
                 "- 研究: 0 days",
                 "- 学習: 0 days",
                 "- 就活: 0 days",
                 "- PJ: 0 days",
                 "",
-                "## Personal Rhythm (Last 30 Days)",
+                "## 🌱 Personal Rhythm (Last 30 Days)",
                 "- 運動: 0 days",
                 "- 興味: none recently",
                 "",
-                "## Monthly Summary",
+                "## 🗂️ Monthly Summary",
                 "まだログがない。",
                 "",
-                "## Recent Entries",
+                "## 🕒 Recent Entries",
                 "- none",
             ]
         )
@@ -270,26 +270,26 @@ def build_auto_block(entries):
     archive_block = "\n".join([f"- [{label}]({folder})" for label, folder in archive_links])
 
     lines = [
-        "## Snapshot",
+        "## 📌 Snapshot",
         f"- Last update: {latest['date'].isoformat()}",
         f"- Active tracks: {active_tracks_text}",
         "- Current focuses:",
         focuses_block,
         "",
-        "## Main Tracks (Last 30 Days)",
+        "## 📚 Main Tracks (Last 30 Days)",
         f"- 研究: {format_day_count(counts_30['研究'])}",
         f"- 学習: {format_day_count(counts_30['学習'])}",
         f"- 就活: {format_day_count(counts_30['就活'])}",
         f"- PJ: {format_day_count(counts_30['PJ'])}",
         "",
-        "## Personal Rhythm (Last 30 Days)",
+        "## 🌱 Personal Rhythm (Last 30 Days)",
         f"- 運動: {format_day_count(counts_30['運動'])}",
         f"- 興味: {interest_text}",
         "",
-        "## Monthly Summary",
+        "## 🗂️ Monthly Summary",
         summary,
         "",
-        "## Recent Entries",
+        "## 🕒 Recent Entries",
         recent_entries,
     ]
 
@@ -297,7 +297,7 @@ def build_auto_block(entries):
         lines.extend(
             [
                 "",
-                "## Archive",
+                "## 📁 Archive",
                 archive_block,
             ]
         )

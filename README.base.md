@@ -7,7 +7,7 @@ A record of research, study, projects, fitness, and daily life.
 This section is generated automatically by `scripts/build.py`.
 <!-- AUTO:END -->
 
-## Tags
+## 🏷️ Tags
 - [研究] Research / lab / experiments
 - [学習] Exam study / courses / technical learning
 - [就活] Internship / job hunting
