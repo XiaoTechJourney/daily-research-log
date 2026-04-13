@@ -17,5 +17,5 @@ TAG(真正生成的时候这段不要放在最后)
 - [学習] Exam study / courses / technical learning
 - [就活] Internship / job hunting
 - [PJ] Personal projects / GitHub / coding / archiving
-- [運動] Training / gym / running / stretching
+- [筋トレ] Strength training / gym
 - [興味] Curiosity / tools / side interests

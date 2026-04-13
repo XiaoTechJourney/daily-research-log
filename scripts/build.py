@@ -12,14 +12,14 @@ README_FILE = ROOT / "README.md"
 FEED_FILE = ROOT / "public" / "profile-feed.json"
 
 MAIN_TAGS = ["研究", "学習", "就活", "PJ"]
-PERSONAL_TAGS = ["運動", "興味"]
+PERSONAL_TAGS = ["筋トレ", "興味"]
 ALL_TAGS = MAIN_TAGS + PERSONAL_TAGS
 TAG_META = {
     "研究": {"icon": "🧪"},
     "学習": {"icon": "📘"},
     "就活": {"icon": "💼"},
     "PJ": {"icon": "🛠️"},
-    "運動": {"icon": "🏃"},
+    "筋トレ": {"icon": "🏃"},
     "興味": {"icon": "🌿"},
 }
 
@@ -248,10 +248,10 @@ def render_count_block(tags, counts):
 
 
 def render_personal_block(counts, interest_text):
-    max_count = max(counts["運動"], 0)
+    max_count = max(counts["筋トレ"], 0)
     return "\n".join(
         [
-            f"- **{tag_icon('運動')} 運動**: `{format_day_count(counts['運動'])}`  `{render_bar(counts['運動'], max_count)}`",
+            f"- **{tag_icon('筋トレ')} 筋トレ**: `{format_day_count(counts['筋トレ'])}`  `{render_bar(counts['筋トレ'], max_count)}`",
             f"- **{tag_icon('興味')} 興味**: {escape_readme_text(interest_text)}",
         ]
     )
